@@ -16,7 +16,7 @@ first_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+  mov rax, 16
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code.
 ;
@@ -34,7 +34,7 @@ second_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+  mov rax, rcx
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55,7 +55,7 @@ third_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+  mov [rcx], rax
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -73,7 +73,7 @@ fourth_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+  mov rax, [rcx]
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -94,7 +94,8 @@ fifth_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+  lea rax, [rcx+8]
+  mov rax, [rax]
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -118,7 +119,9 @@ sixth_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+  mov rax, [rdx]
+  xchg [rcx], rax
+  xchg [rdx], rax
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
