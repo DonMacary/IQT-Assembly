@@ -19,7 +19,8 @@ first_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+    sub rsp, 8
+    mov [rbp-8], rcx
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -51,7 +52,21 @@ second_func
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    push rax
+    push rdx
+    push rcx
 
+    xor rdx, rdx
+    mov rax, [rcx]
+    mov rcx, 10
+    div rcx
+
+    pop rcx
+
+    mov [rcx], rax
+    
+    pop rdx
+    pop rax
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
