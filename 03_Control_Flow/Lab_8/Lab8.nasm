@@ -14,7 +14,7 @@ first_func:
 ;  a buffer to initialize, a
 ;  pointer to which is in RDI,
 ;  and a number of bytes to set,
-;  which is stored in RCX.
+;  which is stored in RDX.
 ;
 ;  Implement a function that will
 ;  set the buffer pointed to by RDI

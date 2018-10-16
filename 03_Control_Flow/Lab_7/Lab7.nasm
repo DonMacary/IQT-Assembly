@@ -17,13 +17,26 @@ first_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+    
+    cmp rdi, rsi 
+    ja .larger
+    jb .smaller
+    jz .equal
+    .larger:
+        mov rax, 1
+        jmp .end
+    .smaller:
+        mov rax, -1
+        jmp .end
+    .equal:
+        mov rax, 0
+        jmp .end
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    pop rbp
-    ret
-
+    .end:
+        pop rbp
+        ret
 second_func:
     push rbp
     mov rbp, rsp
@@ -50,7 +63,13 @@ second_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+    mov rcx, rsi
+    xor ax, ax
+    xor rdx, rdx
+    .continue:
+        add ax, [rdi + rdx*4]
+        inc rdx
+        loop .continue
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -74,11 +93,19 @@ third_func:
 ;  HINT: 
 ;  Just like with second_func, except now we are dealing with chars
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    xor rcx, rcx
+    .continue:
+        mov ch, [rdi + rax]
+        cmp ch, cl
+        jz .end
+        inc rax
+        jmp .continue
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    pop rbp
-    ret
+    .end:
+        pop rbp
+        ret
 
 

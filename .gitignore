@@ -1,6 +1,10 @@
 *.DS_Store
 _book
+<<<<<<< HEAD
 *.cpp
 *.cmake
 *.swp
 *Make*
+=======
+.~lock*
+>>>>>>> 0aeab32dd1ff2b326ca4464741aababc5270c4d0

@@ -14,4 +14,6 @@
 * [Control Flow](03_Control_Flow/README.md)
     * [Flags](03_Control_Flow/3.1_Flags.md)
     * [Control Flow](03_Control_Flow/3.2_Control_Flow.md)
+    * [String Instructions](03_Control_Flow/3.3_Strings_Calls.md)
+    * [Calling Conventions](03_Control_Flow/3.4_Calls.md)
     

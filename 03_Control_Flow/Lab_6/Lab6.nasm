@@ -18,6 +18,15 @@ first_func:
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;    mov al, 128
+;    add al, 65535
+    xor rax, rax
+    pushf 
+    pop rax
+    mov rcx, 1
+    or rax, rcx
+    push rax
+    popf
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -32,6 +41,17 @@ second_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;    xor al, al
+;   mov al, -128
+;    sub al, 1
+    xor rax, rax
+    pushf
+    pop rax
+    mov rcx, 2048
+    or rax, rcx
+    push rax
+    popf
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
@@ -48,6 +68,13 @@ third_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    xor rax, rax
+    pushf
+    pop rax
+    mov rcx, 2049
+    or rax, rcx
+    push rax
+    popf
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
