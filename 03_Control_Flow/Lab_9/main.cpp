@@ -45,7 +45,7 @@ int main(int argc, char** argv)
     EQ((size_t)0, strcmp(tmp, str));    
 
     printf("Calling the third function (fibonacci)\n");
-    EQ((size_t)55, third_func(10));
+    EQ((size_t)1, third_func(1));
 
     return 0;
 }

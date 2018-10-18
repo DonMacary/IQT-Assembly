@@ -1,3 +1,6 @@
+;Author: ELF
+;Course: Assembly
+;FileName:
 bits 64
 
 global first_func, second_func, third_func
@@ -5,8 +8,6 @@ global first_func, second_func, third_func
 first_func:
     push rbp
     mov rbp, rsp
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  Two values have been provided,
 ;  a value (consisting of a single
@@ -29,7 +30,9 @@ first_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+    mov rcx, rdx
+    mov rax, rsi
+    rep stosb
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
@@ -60,6 +63,8 @@ second_func:
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+    mov rcx, rdx
+    rep movsb
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
@@ -94,7 +99,12 @@ third_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+    xor rcx, rcx
+    xor rax, rax
+    mov rcx, 65535
+    repne scasb
+    mov rax, 65534
+    sub rax, rcx
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code

@@ -1,3 +1,7 @@
+; Author: ELF
+; File: Lab9 (Functions and Fibonnaci)
+; IQT - ASM
+
 bits 64
 
 global first_func, second_func, third_func
@@ -14,6 +18,9 @@ first_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    xor rax, rax
+    mov rdi, mystr
+    call printf
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
@@ -56,7 +63,22 @@ second_func:
 ; 
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    push rbp
+    mov rbp, rsp
 
+    push rdi                ; pushed rdi (function pointer) onto stack so we can get its value back later
+    mov rdi, rsi            ; moved the string into rdi so we can use it in the next function
+
+    xor rax, rax            ; clear out rax for return value
+    call strlen             ; called strlen where the first parameter is rdi (the string we were given)
+
+    mov rsi, rax            ; move the string length returned value into rsi
+
+    pop rcx                 ; takes the function pointer off the stack and stores it into rcx
+
+    call rcx                ; calls the function pointer using the string as rdi the length as rsi
+                            
+    pop rbp   
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -71,7 +93,19 @@ third_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    push rbp
+    mov rbp, rsp
 
+    xor rax, rax        ;current fib number
+    mov rax, 1          ;start at 1
+    xor rdx, rdx        ;previous fib number
+    .fibloop:
+        xadd rax, rdx       ;last=fib and fib = fib+last
+        sub rdi, 1
+        cmp rdi, 1
+        ja .fibloop       ;loop through however many times is supplied
+                       
+    pop rbp 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
