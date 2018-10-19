@@ -1,3 +1,5 @@
+;Author - ELF
+;Lab 10
 bits 64
 
 global first_func, second_func, third_func
@@ -12,7 +14,9 @@ first_func:
 ;
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+rdtsc
+shl rdx, 32
+or rax, rdx 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -29,7 +33,11 @@ second_func:
 ; 
 ;  BEGIN student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+xor rax, rax
+cpuid 
+mov [rdi], ebx
+mov [rdi+4], edx
+mov [rdi+8], ecx
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  END student code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
