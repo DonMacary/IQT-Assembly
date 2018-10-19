@@ -25,8 +25,20 @@ _unpack_string@12:
 ;
 ; BEGIN STUDENT CODE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
+push ebp
+mov ebp, esp
+mov esi, [ebp + 8]			; input (param 1)
+mov edi, [ebp + 12]			; output (param 2)
+mov ecx, [ebp + 16]			; length (param 3)
 
+.continue:
+	lodsb 
+	shr al, 1
+	stosb
+	loop .continue
 
+pop ebp
+ret 12
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; END STUDENT CODE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -61,7 +73,31 @@ endstruc
 ;
 ; BEGIN STUDENT CODE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
+push ebp
+mov ebp, esp
+xor esi, esi
+mov esi, [ecx]
 
+.findloop:
+	xor eax, eax
+	mov eax, [esi + Node.Data]
+	cmp edx, eax					; checks if the data in the node is equal to the data given
+	je .found						; if so jump to found
+	mov esi, [esi + Node.Next]		; if there is another node then mov to that one
+	cmp esi, 0
+	je .notfound					; if so jump to not found
+	jmp .findloop					; start back at top of loop
+
+.found:
+	mov eax, esi					; if we find the node then move that node into eax
+	jmp .end
+
+.notfound:
+	mov eax, 0						; if the node isnt in the linked list then make eax 0 and ret
+
+.end:
+	pop ebp							; return
+	ret 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; END STUDENT CODE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -88,7 +124,20 @@ _call_function:
 ;	
 ; BEGIN STUDENT CODE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
+push ebp
+mov ebp, esp				
 
+xor eax, eax			;clear out eax
+call _first_func@0		;call first func 
+mov ecx, eax			;result is stored in eax but we'll need to move it out to another register
+
+push ecx				;push the result onto the stack
+xor eax, eax			;clear out eax
+call _test_func			;call the second function with the result of the last on the stack as a parameter
+
+pop ecx					;result of second function is in eax time to clean up - first pop ecx
+pop ebp					;pop stack pointer
+ret
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; END STUDENT CODE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
