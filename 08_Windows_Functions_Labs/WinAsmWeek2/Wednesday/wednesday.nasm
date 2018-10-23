@@ -22,7 +22,19 @@ _sum_array@8:
 ;
 ; BEGIN STUDENT CODE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
+push ebp
+mov ebp, esp
 
+mov edi, [ebp + 8]				;moving the buffer of ints into edi
+mov ecx, [ebp + 12]				;storing the size of the array into ecx
+xor eax, eax
+.addLoop:
+	add eax, [edi]				;adds eax to the value of edi
+	add edi, 4					;moves to the next int in the array
+	loop .addLoop				;loops through for each value in the array
+
+pop ebp
+ret 8							;returns the value stored in eax
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; END STUDENT CODE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -47,7 +59,23 @@ _find_largest:
 ;
 ; BEGIN STUDENT CODE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
+push ebp
+mov ebp, esp
 
+mov edi, [ebp + 8]				;pointer to beginning of array of ints
+mov ecx, [ebp + 12]				;number of ints in the array
+		
+xor eax, eax			
+.findLoop:
+	cmp eax, [edi]				;compares whatever is in eax to the int we are currently looking at
+	ja .nextInt					;if eax is > than the int in the array then skip next instruction
+	mov eax, [edi]				;if eax <= current value then move that value into eax
+	.nextInt:					;move on to next int in the array and loop through all ints
+		add edi, 4
+		loop .findLoop
+
+pop ebp
+ret
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; END STUDENT CODE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
