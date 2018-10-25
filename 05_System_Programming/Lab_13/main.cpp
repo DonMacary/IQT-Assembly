@@ -299,7 +299,7 @@ void test_walk_list()
     size_t needle = 0;
     size_t result = 0;
     allocate_list(&list, &needle, 20);
-    //print_data(list);
+    print_data(list);
     result = walk_list(list, needle);
     EQ(needle, result);
     deallocate_list(list);
@@ -340,13 +340,13 @@ int main(int argc, char** argv)
 
     // ########## TEST CASES ##########
     // #### UNCOMMENT AS NEEDED #######
-    find_largest_test();
+    //find_largest_test();
     //string_tests();
     //mem_tests();
     //test_walk_list();
     //printf("Preparing to run Quicksort tests (BONUS)\n");
     //sort_tests(ex_qsort);
-    //printf("Preparing to run Insertion Sort tests (BONUS)\n");
-    //sort_tests(ex_isort);
+    printf("Preparing to run Insertion Sort tests (BONUS)\n");
+    sort_tests(ex_isort);
     return 0;
 }
