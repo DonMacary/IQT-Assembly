@@ -484,30 +484,40 @@ mov rbp, rsp
 
 .setup:
     xor rcx, rcx
-    mov rcx, 1                  ;rcx is my j
-    xor rbx, rbx                ;rbx is my i
-    xor rax, rax                ;rax is my key
-
+    mov rcx, 1                  ;rcx = j
+    xor rbx, rbx                ;rbx = i = 0
+    xor rax, rax                ;rax = key = 0
+    xor edx, edx
 cmp rdi, 0                      ;check if the array is empty
 je .end
 cmp rsi, 0                      ;check if the size is 0
 je .end
 .outterLoop:
-    cmp rbx, rsi                ;compares j to size if j>size then were done
-    ja .end
+    cmp rcx, rsi                ;compares j to size if j>size then were done
+    je .end                     ;if j > size end
     mov rbx, rcx                ;i=j-1
     sub rbx, 1
-
-    mov rax, [rdi + rcx]         ;key = array[j]
+    lea rax, [rdi + rcx*4]
+    mov eax, dword [rax]
 
     .innerLoop:
-        cmp rbx, 0              ;if i <=0 then iterate to next j value
-        jb .outterLoop          
-        cmp [rdi + rbx], rax    ;if array[i] < key iterate to next j value
-        jb .outterLoop  
-        mov r10, [rdi+rax]
-        xchg r10, [rdi+rax]     ;array[i+1]=array[i]
+        cmp rbx, -1                         ;if i <0 then iterate to next j value
+        je .backToOuter          
+        cmp [rdi + rbx*4], eax              ;if array[i] > key iterate to next i value
+        jb .backToInner  
+        lea rdx, [rdi + rbx*4]              ;edx = *array[i]
+        mov edx, dword [rdx]                ;edx = array[i]
+        xchg edx, [rdi + rbx*4 + 4]         ;array[i+1]<-->r10
+        xchg edx, [rdi + rbx*4]             ;array[i]<-->r10
+        jmp .backToInner 
 
+.backToOuter:
+    add rcx, 1                          ;j+1
+    jmp .outterLoop
+
+.backToInner:
+    sub rbx, 1                          ;i+1
+    jmp .innerLoop
 
 .end:
     mov rax, rdi
